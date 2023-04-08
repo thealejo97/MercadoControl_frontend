@@ -1,1 +1,0 @@
-# MercadoControl_frontend

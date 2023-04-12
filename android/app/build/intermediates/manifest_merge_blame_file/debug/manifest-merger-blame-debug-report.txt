@@ -1,0 +1,174 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.mercadocontrolfrontend"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:5:3-75
+11-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:5:20-73
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:3:3-64
+12-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:3:20-62
+13    <uses-permission android:name="android.permission.VIBRATE" /> <!-- These require runtime permissions on M -->
+13-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:6:3-63
+13-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:6:20-61
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:8:3-77
+14-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:8:20-75
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- END OPTIONAL PERMISSIONS -->
+15-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:9:3-78
+15-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:9:20-76
+16    <queries>
+16-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:12:3-19:13
+17
+18        <!-- Support checking for http(s) links via the Linking API -->
+19        <intent>
+19-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:14:5-18:14
+20            <action android:name="android.intent.action.VIEW" />
+20-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:15:7-59
+20-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:15:15-56
+21
+22            <category android:name="android.intent.category.BROWSABLE" />
+22-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:16:7-68
+22-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:16:17-65
+23
+24            <data android:scheme="https" />
+24-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:17:7-38
+24-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:17:13-35
+25        </intent>
+26        <!-- Query open documents -->
+27        <intent>
+27-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-17:18
+28            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+28-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-79
+28-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:21-76
+29        </intent>
+30    </queries>
+31
+32    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+32-->[com.facebook.flipper:flipper:0.125.0] C:\Users\Alejandro\.gradle\caches\transforms-3\92ad11363d6a6f1ea5a8b9f3f48d9338\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:5-76
+32-->[com.facebook.flipper:flipper:0.125.0] C:\Users\Alejandro\.gradle\caches\transforms-3\92ad11363d6a6f1ea5a8b9f3f48d9338\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:22-73
+33    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+33-->[com.android.installreferrer:installreferrer:1.0] C:\Users\Alejandro\.gradle\caches\transforms-3\6896888ad7a90361e416081be552069c\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+33-->[com.android.installreferrer:installreferrer:1.0] C:\Users\Alejandro\.gradle\caches\transforms-3\6896888ad7a90361e416081be552069c\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+34
+35    <application
+35-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:3-31:17
+36        android:name="com.mercadocontrolfrontend.MainApplication"
+36-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:16-47
+37        android:allowBackup="false"
+37-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:162-189
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.7.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3c3d67745cc0055a2f3c7aa5c1d315d3\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+39        android:debuggable="true"
+40        android:icon="@mipmap/ic_launcher"
+40-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:81-115
+41        android:label="@string/app_name"
+41-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:48-80
+42        android:roundIcon="@mipmap/ic_launcher_round"
+42-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:116-161
+43        android:theme="@style/AppTheme"
+43-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:190-221
+44        android:usesCleartextTraffic="true" >
+44-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:21:222-257
+45        <meta-data
+45-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:22:5-103
+46            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+46-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:22:16-67
+47            android:value="YOUR-APP-URL-HERE" />
+47-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:22:68-101
+48        <meta-data
+48-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:23:5-112
+49            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+49-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:23:16-68
+50            android:value="YOUR-APP-SDK-VERSION-HERE" />
+50-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:23:69-110
+51
+52        <activity
+52-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:5-29:16
+53            android:name="com.mercadocontrolfrontend.MainActivity"
+53-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:15-43
+54            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+54-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:77-154
+55            android:exported="true"
+55-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:276-299
+56            android:label="@string/app_name"
+56-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:44-76
+57            android:launchMode="singleTask"
+57-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:155-186
+58            android:theme="@style/Theme.App.SplashScreen"
+58-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:230-275
+59            android:windowSoftInputMode="adjustResize" >
+59-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:24:187-229
+60            <intent-filter>
+60-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:25:7-28:23
+61                <action android:name="android.intent.action.MAIN" />
+61-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:26:9-60
+61-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:26:17-58
+62
+63                <category android:name="android.intent.category.LAUNCHER" />
+63-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:27:9-68
+63-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:27:19-66
+64            </intent-filter>
+65        </activity>
+66        <activity
+66-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:30:5-106
+67            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+67-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:30:15-79
+68            android:exported="false" />
+68-->C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\android\app\src\main\AndroidManifest.xml:30:80-104
+69
+70        <provider
+70-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:9-30:20
+71            android:name="expo.modules.filesystem.FileSystemFileProvider"
+71-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-74
+72            android:authorities="com.mercadocontrolfrontend.FileSystemFileProvider"
+72-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-74
+73            android:exported="false"
+73-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-37
+74            android:grantUriPermissions="true" >
+74-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-47
+75            <meta-data
+75-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-29:70
+76                android:name="android.support.FILE_PROVIDER_PATHS"
+76-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:17-67
+77                android:resource="@xml/file_system_provider_paths" />
+77-->[:expo-file-system] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-67
+78        </provider>
+79
+80        <meta-data
+80-->[:expo-modules-core] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-10:89
+81            android:name="org.unimodules.core.AppLoader#react-native-headless"
+81-->[:expo-modules-core] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-79
+82            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+82-->[:expo-modules-core] C:\Users\Alejandro\Documents\proyectos\MercadoControl\MercadoControlApp\MercadoControl_frontend\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-86
+83
+84        <provider
+84-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+85            android:name="androidx.startup.InitializationProvider"
+85-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+86            android:authorities="com.mercadocontrolfrontend.androidx-startup"
+86-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+87            android:exported="false" >
+87-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+88            <meta-data
+88-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+89                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+89-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+90                android:value="androidx.startup" />
+90-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Alejandro\.gradle\caches\transforms-3\3393f4c2dacd3424be6618614c2c97cd\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+91            <meta-data
+91-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Alejandro\.gradle\caches\transforms-3\fc49bab9ad5b82206670bef3f766995b\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+92                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+92-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Alejandro\.gradle\caches\transforms-3\fc49bab9ad5b82206670bef3f766995b\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+93                android:value="androidx.startup" />
+93-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Alejandro\.gradle\caches\transforms-3\fc49bab9ad5b82206670bef3f766995b\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+94        </provider>
+95    </application>
+96
+97</manifest>

@@ -4,9 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { themeColors } from '../theme'
 import { useNavigation } from '@react-navigation/native'
 import 'nativewind'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function WelcomeScreen() {
     const navigation = useNavigation();
+    const user_id = AsyncStorage.getItem('@user_id');
+    if(user_id !=null){
+        navigation.navigate('ShoppingList');
+    }
   return (
     <SafeAreaView className="flex-1" style={{backgroundColor: themeColors.bg}}>
         <View className="flex-1 flex justify-around my-4">

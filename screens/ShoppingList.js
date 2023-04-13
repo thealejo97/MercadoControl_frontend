@@ -44,7 +44,6 @@ const ShoppingList = () => {
         {shoppingList.map((shoppingListItem) => (
           <View key={shoppingListItem.id} style={{ marginBottom: 5 }}>
             <Text>Nombre: {shoppingListItem.name}</Text>
-            <Text>Usuario: {shoppingListItem.user}</Text>
             <Text style={{ marginBottom: 5 }}>
               Productos: {JSON.stringify(shoppingListItem.products_of_shopping_list)}
             </Text>

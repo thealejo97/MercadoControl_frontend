@@ -5,6 +5,7 @@ import {ArrowLeftIcon} from 'react-native-heroicons/solid'
 import { themeColors } from '../theme'
 import {styles} from '../theme/styles'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -19,6 +20,7 @@ export default function LoginScreen() {
 
         How it works:
         Initially, we request the CSRF token from the Django backend, and then we use that token to check if the data is correct or incorrect.
+        Also save in a persistent variable, token,user_name,user_id,user
 
         Created by: Alejandro Montaño
         Date: 11-04-2023
@@ -43,9 +45,15 @@ export default function LoginScreen() {
     const data = await response.json();
 
     if (response.ok) {
-      console.log('si');
+      await AsyncStorage.setItem('@token', data.token);
+      await AsyncStorage.setItem('@user_name', data.user_name);
+      await AsyncStorage.setItem('@user_id', String(data.user_id));
+      await AsyncStorage.setItem('@user', data.user);
+
+      navigation.navigate('ShoppingList');
     } else {
-      console.log('No');
+      alert(data.error);
+      console.log('No', username," ", password, " ",data);
     }
   };
 

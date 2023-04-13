@@ -1,43 +1,33 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React, { useState, useEffect } from 'react';
+import { Text, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const handleListOfPrices = async () => {
-  /*
-   * handle to get all the shopping list created
+const ShoppingList = () => {
+  const [username, setUsername] = useState('');
 
-      How it works:
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        
+        const user_name = await AsyncStorage.getItem('@user_name');
+        setUsername(user_name);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      Created by: Alejandro Montaño
-      Date: 12-04-2023
-   */
-/*
-  const csrfResponse = await fetch('https://mercadocontrolback.fly.dev/api/users/csrf_cookie/');
-  const token = csrfResponse.headers.get('Set-Cookie').split('=')[1].split(';')[0];
-  setCsrfToken(token);
-*/
-  const response = await fetch('https://mercadocontrolback.fly.dev/api/shopping_list/', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': token,
-    }
-  });
+    fetchData();
+  }, []);
 
-  const data = await response.json();
-
-  if (response.ok) {
-    console.log(data);
-  } else {
-    console.log(response);
-  }
+  return (
+    <View>
+      <Text>Bienvenido {username}</Text>
+      <Text>Bienvenido {username}</Text>
+      <Text>Bienvenido {username}</Text>
+      <Text>Bienvenido {username}</Text>
+      <Text>Bienvenido {username}</Text>
+    </View>
+  );
 };
 
-
-export default function HomeScreen() {
-  return (
-    <SafeAreaView>
-      <Text>Shopping_List</Text>
-    </SafeAreaView>
-  )
-}
+export default ShoppingList;

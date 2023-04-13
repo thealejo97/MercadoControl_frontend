@@ -43,9 +43,11 @@ export default function LoginScreen() {
     const data = await response.json();
 
     if (response.ok) {
-      console.log('si');
+      console.log('si', username," ", password);
+      navigation.navigate('ShoppingList'); // redireccionar al usuario a la vista ShoppingList
     } else {
-      console.log('No');
+      alert(data.error);
+      console.log('No', username," ", password, " ",data);
     }
   };
 

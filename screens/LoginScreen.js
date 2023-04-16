@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput,ScrollView } from 'react-native'
 import React,{ useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {ArrowLeftIcon} from 'react-native-heroicons/solid'
@@ -59,6 +59,7 @@ export default function LoginScreen() {
 
   const navigation = useNavigation();
   return (
+    <ScrollView>
     <View className="flex-1 bg-white" style={{backgroundColor: themeColors.bg}}>
       <SafeAreaView  className="flex ">
         <View className="flex-row justify-start">
@@ -67,8 +68,8 @@ export default function LoginScreen() {
             <ArrowLeftIcon size="20" color="black" />
           </TouchableOpacity>
         </View>
-        <View  className="flex-row justify-center">
-          <Image source={require('../assets/images/login.png')} 
+        <View  className="flex-row justify-center my-4">
+          <Image source={require('../assets/images/logo.png')} 
           style={{width: 200, height: 200}} />
         </View>
         
@@ -130,6 +131,6 @@ export default function LoginScreen() {
           
       </View>
     </View>
-    
+    </ScrollView>
   )
 }

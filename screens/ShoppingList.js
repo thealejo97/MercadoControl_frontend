@@ -55,6 +55,10 @@ const ShoppingList = () => {
       </View>
     </View>
   );
+  
+  ShoppingList.navigationOptions = {
+    title: 'Home',
+  };
 
   return (
     <View style={styles.container}>

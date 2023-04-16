@@ -62,8 +62,6 @@ const ShoppingList = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Bienvenido {username}</Text>
-      <Text style={{ marginTop: 10 }}>Su lista de compras es:</Text>
       <FlatList
         style={styles.list}
         data={shoppingList}

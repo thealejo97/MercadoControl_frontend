@@ -2,6 +2,12 @@ import React from 'react';
 import { View, ActivityIndicator,StyleSheet } from 'react-native';
 
 const Loading = () => {
+       /*
+        * Loading view, show a loading over all the view
+
+            Created by: Alejandro Montaño
+            Date: 17-04-2023
+     */
     return (
     <View style={[styles.container, styles.horizontal, styles.overlay]}>
         <ActivityIndicator size="large" color="#00ff00" />

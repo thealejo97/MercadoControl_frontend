@@ -13,28 +13,38 @@ import { useNavigation } from '@react-navigation/native'
 import { themeColors } from '../theme'
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
   const handleSignUp = async () => {
+    console.log("Registring")
+    const csrfResponse = await fetch('https://mercadocontrolback.fly.dev/api/users/csrf_cookie/');
+    const token = csrfResponse.headers.get('Set-Cookie').split('=')[1].split(';')[0];
+    console.log(token)
+    
     try {
       const response = await fetch('https://mercadocontrolback.fly.dev/api/users/signup/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-CSRFToken': token,
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, password,'currency_unit':'COP' })
       });
 
-      const data = await response.json();
+      console.log("response",response.status)
+      
+      
 
       if (response.ok) {
+        console.log("Ok")
         // login successful
-        console.log('Logged in successfully!');
+        console.log('register in successfully!');
       } else {
         // login failed
-        console.log('Login failed: ' + data.error);
+        console.log("Failed",response)
+        console.log('register failed: ' + response.error);
       }
     } catch (error) {
       console.error(error);
@@ -55,12 +65,12 @@ const SignUp = () => {
         <View style={styles.formContainer}>
           
           <View style={styles.form}>
-            <Text style={styles.label}>Email Address</Text>
+            <Text style={styles.label}>username Address</Text>
             <TextInput 
               style={styles.input}
-              placeholder="email"
-              value={email}
-              onChangeText={setEmail}
+              placeholder="username"
+              value={username}
+              onChangeText={setusername}
             />
             <Text style={styles.label}>Password</Text>
             <TextInput 

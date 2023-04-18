@@ -52,6 +52,10 @@ const MenuItems = () => {
         onPress={() => navigation.navigate('ShoppingList')}
       />
       <DrawerItem
+        label="WelcomeScreen"
+        onPress={() => navigation.navigate('WelcomeScreen')}
+      />
+      <DrawerItem
         label="Cerrar sesión"
         onPress={handleLogout}
       />

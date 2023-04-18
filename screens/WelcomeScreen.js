@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function WelcomeScreen() {
     const navigation = useNavigation();
     const user_id = AsyncStorage.getItem('@user_id');
-    if(user_id !=null){
+    if(user_id ===null){
         navigation.navigate('ShoppingList');
     }
   return (

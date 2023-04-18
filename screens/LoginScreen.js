@@ -6,6 +6,7 @@ import { themeColors } from '../theme'
 import {styles} from '../theme/styles'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loading from './Loading';
 
 
 
@@ -13,6 +14,7 @@ export default function LoginScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [csrfToken, setCsrfToken] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     /*
@@ -25,7 +27,8 @@ export default function LoginScreen() {
         Created by: Alejandro Montaño
         Date: 11-04-2023
      */
-
+    console.log("********************* Ejecutando el login ************************************")
+    setLoading(true);
     const csrfResponse = await fetch('https://mercadocontrolback.fly.dev/api/users/csrf_cookie/');
     const token = csrfResponse.headers.get('Set-Cookie').split('=')[1].split(';')[0];
     setCsrfToken(token);
@@ -45,6 +48,7 @@ export default function LoginScreen() {
     const data = await response.json();
 
     if (response.ok) {
+      setLoading(false);
       await AsyncStorage.setItem('@token', data.token);
       await AsyncStorage.setItem('@user_name', data.user_name);
       await AsyncStorage.setItem('@user_id', String(data.user_id));
@@ -52,6 +56,7 @@ export default function LoginScreen() {
 
       navigation.navigate('ShoppingList');
     } else {
+      setLoading(false);
       alert(data.error);
       console.log('No', username," ", password, " ",data);
     }
@@ -60,6 +65,7 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   return (
     <ScrollView>
+    {loading && <Loading />}
     <View className="flex-1 bg-white" style={{backgroundColor: themeColors.bg}}>
       <SafeAreaView  className="flex ">
         <View className="flex-row justify-start">
@@ -112,9 +118,6 @@ export default function LoginScreen() {
           <View className="flex-row justify-center space-x-12" style={[]}>
             <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl" style={[]}>
               <Image source={require('../assets/icons/google.png')} className="w-10 h-10" style={[]} />
-            </TouchableOpacity>
-            <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl" style={[]}>
-              <Image source={require('../assets/icons/apple.png')} className="w-10 h-10" style={[]} />
             </TouchableOpacity>
             <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
               <Image source={require('../assets/icons/facebook.png')} className="w-10 h-10" style={[]} />

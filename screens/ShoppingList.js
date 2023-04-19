@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const ShoppingList = () => {
   const [username, setUsername] = useState('');
   const [shoppingList, setShoppingList] = useState([]);
+  const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,33 +32,50 @@ const ShoppingList = () => {
         if (response.ok) {
           const logo_supermarket = data[0].products_of_shopping_list[0].list_of_price.supermarket_logo
           data[0].logo_super = "https://mercadocontrolback.fly.dev"+logo_supermarket
-          
-
           setShoppingList(data);
         } else {
           console.log(response);
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
 
   const renderItem = ({ item }) => (
-    <View style={styles.card}>
-      <View style={styles.cardImageContainer}>
-        <Image style={styles.cardImage} source={{ uri: item.logo_super }} />
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('ShoppingListDetail', { id: item.id.toString() })
+      }>
+      <View style={styles.card}>
+        <View style={styles.cardImageContainer}>
+          <Image style={styles.cardImage} source={{ uri: item.logo_super }} />
+        </View>
+        <View style={styles.cardContent}>
+          <Text style={styles.cardText}>{item.name}</Text>
+          <Text style={styles.cardText}>
+            Creada: {item.creation_date.substr(0, 10)}{' '}
+            <Text style={styles.cardText}>
+              {item.creation_date.substr(12, 4)}
+            </Text>
+          </Text>
+        </View>
       </View>
-      <View style={styles.cardContent}>
-        <Text style={styles.cardText}>{item.name}</Text>
-        <Text style={styles.cardText}>Creada: {item.creation_date.substr(0, 10)}  <Text style={styles.cardText}>{item.creation_date.substr(12, 4)}</Text></Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
-  
+
   ShoppingList.navigationOptions = {
     title: 'Home',
   };

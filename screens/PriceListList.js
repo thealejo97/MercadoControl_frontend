@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
 import formatCurrency from './Helpers';
 import { useNavigation } from '@react-navigation/native';
+import SupermarketPicker from './SupermarketPicker';
 
 const ShoppingList = () => {
   const [listOfPrice, setlistOfPrice] = useState([]);
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedSupermarket, setSelectedSupermarket] = useState(null);
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
+    setIsLoading(true);
+    let url = 'https://mercadocontrolback.fly.dev/api/list_of_prices/';
+    if (selectedSupermarket) {
+      url += `?supermarket_id=${selectedSupermarket.id}`;
+      console.log("cambiaron url", selectedSupermarket)
+    }
     const fetchData = async () => {
       try {
-
+        console.log("ejecutando ", url)
         const response = await fetch(
-          'https://mercadocontrolback.fly.dev/api/list_of_prices/',
+          url,
           {
             method: 'GET',
             headers: {
@@ -26,18 +39,19 @@ const ShoppingList = () => {
 
         if (response.ok) {
             setlistOfPrice(data);
+            setIsLoading(false);
         } else {
-          console.log(response);
+          setIsLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [selectedSupermarket]);
 
 
   if (isLoading) {
@@ -71,9 +85,20 @@ const ShoppingList = () => {
     </TouchableOpacity>
   );
 
-
+  const handleSupermarketChange = (supermarket) => {
+    console.log("Seleccionado ", supermarket.id)
+    setSelectedSupermarket(supermarket);
+    };
   return (
     <View style={styles.container}>
+      
+      <SupermarketPicker
+        visible={isModalVisible}
+        onClose={handleCloseModal}
+        onSelect={handleSupermarketChange}
+      />
+      <Text>{selectedSupermarket ? selectedSupermarket.name : ''}</Text>
+      
       <FlatList
         style={styles.list}
         data={listOfPrice}

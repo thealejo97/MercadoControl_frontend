@@ -19,11 +19,11 @@ export function DrawerNavigation() {
     <Drawer.Navigator
       drawerContent={ (props) => <MenuItems {...props} />}
     >
-      <Drawer.Screen name="WelcomeScreen" options={{ headerShown: false, drawerLabel: () => null }} component={WelcomeScreen} />
+      <Drawer.Screen name="WelcomeScreen"  component={WelcomeScreen} />
       <Drawer.Screen name="LoginScreen" options={{ headerShown: false, drawerLabel: () => null }} component={LoginScreen} />
       <Drawer.Screen name="ShoppingList" options={{ drawerLabel: 'Listas de compras', title: '' }} component={ShoppingList} />
       <Drawer.Screen name="SignUp" options={{ headerShown: false, drawerLabel: () => null }} component={SignUp} />
-      <Drawer.Screen name="PriceListList" options={{ drawerLabel: 'Precios', title: '' }} component={PriceListList} />
+      <Drawer.Screen name="PriceListList" options={{ drawerLabel: 'Precios', title: 'Precios' }} component={PriceListList} />
     </Drawer.Navigator>
   );
 }

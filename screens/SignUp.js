@@ -7,53 +7,67 @@ import {
   StyleSheet, 
   TouchableOpacity, 
   Image, 
-  ScrollView 
+  ScrollView,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-import { themeColors } from '../theme'
+import Loading from './Loading';
+
 
 const SignUp = () => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+  const [csrfToken, setCsrfToken] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
+    setLoading(true);
     console.log("Registring")
-    const csrfResponse = await fetch('https://mercadocontrolback.fly.dev/api/users/csrf_cookie/');
-    const token = csrfResponse.headers.get('Set-Cookie').split('=')[1].split(';')[0];
-    console.log(token)
-    
     try {
+      const csrfResponse = await fetch('https://mercadocontrolback.fly.dev/api/users/csrf_cookie/');
+      const csrfToken = csrfResponse.headers.get('Set-Cookie').split('=')[1].split(';')[0];
+      setCsrfToken(csrfToken);
+
       const response = await fetch('https://mercadocontrolback.fly.dev/api/users/signup/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': token,
+          'X-CSRFToken': csrfToken,
+          'Cookie': `csrftoken=${csrfToken};`,
         },
-        body: JSON.stringify({ username, password,'currency_unit':'COP' })
+        body: JSON.stringify({ username, password, 'currency_unit': 'COP' })
       });
-
-      console.log("response",response.status)
-      
-      
+      const data = await response.json();
 
       if (response.ok) {
+        setLoading(false);
         console.log("Ok")
-        // login successful
+        Alert.alert(
+          '¡Registro exitoso!',
+          'Tu cuenta ha sido creada exitosamente.',
+          [{text: 'OK'}]
+        );
+        navigation.navigate('LoginScreen');
         console.log('register in successfully!');
       } else {
-        // login failed
+        setLoading(false);
         console.log("Failed",response)
+        Alert.alert(
+          'Error en el registro',
+          data.error,
+          [{text: 'OK'}]
+        );
         console.log('register failed: ' + response.error);
       }
     } catch (error) {
       console.error(error);
     }
   };
-
  
   return (
     <ScrollView>
+      {loading && <Loading />}
       <View style={{flex: 1 }}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { DrawerContentScrollView, DrawerItem, createDrawerNavigator } from '@react-navigation/drawer';
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,Image  } from 'react-native'
 import LoginScreen from '../screens/LoginScreen';
 import ShoppingList from '../screens/ShoppingList';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignUp from '../screens/SignUp';
+import ShoppingListDetail from '../screens/ShoppingListDetail';
+import PriceListList from '../screens/PriceListList';
 import { useNavigation } from '@react-navigation/native'
+import defaultUserImage from '../assets/icons/default_user.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Drawer = createDrawerNavigator();
@@ -16,10 +19,11 @@ export function DrawerNavigation() {
     <Drawer.Navigator
       drawerContent={ (props) => <MenuItems {...props} />}
     >
-      <Drawer.Screen name="WelcomeScreen" options={{ headerShown: false, drawerLabel: () => null }} component={WelcomeScreen} />
+      <Drawer.Screen name="WelcomeScreen"  component={WelcomeScreen} />
       <Drawer.Screen name="LoginScreen" options={{ headerShown: false, drawerLabel: () => null }} component={LoginScreen} />
-      <Drawer.Screen name="ShoppingList" options={{ drawerLabel: 'Lista de compras', title: '' }} component={ShoppingList} />
+      <Drawer.Screen name="ShoppingList" options={{ drawerLabel: 'Listas de compras', title: '' }} component={ShoppingList} />
       <Drawer.Screen name="SignUp" options={{ headerShown: false, drawerLabel: () => null }} component={SignUp} />
+      <Drawer.Screen name="PriceListList" options={{ drawerLabel: 'Precios', title: 'Precios' }} component={PriceListList} />
     </Drawer.Navigator>
   );
 }
@@ -47,11 +51,18 @@ const MenuItems = () => {
     <DrawerContentScrollView
       style={styles.container}>
       <View style={styles.userContainer}>
+        <View style={styles.imageContainer}>
+          <Image source={defaultUserImage} style={styles.image} />
+        </View>
         <Text style={styles.title}>{userName}</Text>
       </View>
       <DrawerItem
         label="Lista de compras"
         onPress={() => navigation.navigate('ShoppingList')}
+      />
+      <DrawerItem
+        label="Precios"
+        onPress={() => navigation.navigate('PriceListList')}
       />
       <DrawerItem
         label="Cerrar sesión"
@@ -68,9 +79,19 @@ const styles  = StyleSheet.create({
     fontSize : 20,
   },
   userContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 20,
+  },
+  imageContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    overflow: 'hidden',
+    marginBottom: 10,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 })

@@ -6,6 +6,7 @@ import ShoppingList from '../screens/ShoppingList';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignUp from '../screens/SignUp';
 import ShoppingListDetail from '../screens/ShoppingListDetail';
+import PriceListList from '../screens/PriceListList';
 import { useNavigation } from '@react-navigation/native'
 import defaultUserImage from '../assets/icons/default_user.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,7 +23,7 @@ export function DrawerNavigation() {
       <Drawer.Screen name="LoginScreen" options={{ headerShown: false, drawerLabel: () => null }} component={LoginScreen} />
       <Drawer.Screen name="ShoppingList" options={{ drawerLabel: 'Listas de compras', title: '' }} component={ShoppingList} />
       <Drawer.Screen name="SignUp" options={{ headerShown: false, drawerLabel: () => null }} component={SignUp} />
-      <Drawer.Screen name="ShoppingListDetail" options={{ drawerLabel: 'Lista de compras', title: '' }} component={ShoppingListDetail} />
+      <Drawer.Screen name="PriceListList" options={{ drawerLabel: 'Precios', title: '' }} component={PriceListList} />
     </Drawer.Navigator>
   );
 }
@@ -58,6 +59,10 @@ const MenuItems = () => {
       <DrawerItem
         label="Lista de compras"
         onPress={() => navigation.navigate('ShoppingList')}
+      />
+      <DrawerItem
+        label="Precios"
+        onPress={() => navigation.navigate('PriceListList')}
       />
       <DrawerItem
         label="Cerrar sesión"

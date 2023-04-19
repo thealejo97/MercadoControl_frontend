@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import formatCurrency from './Helpers';
 import { useNavigation } from '@react-navigation/native';
 
 const ShoppingList = () => {
-  const [shoppingList, setShoppingList] = useState([]);
+  const [listOfPrice, setlistOfPrice] = useState([]);
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const user_id = await AsyncStorage.getItem('@user_id');
 
         const response = await fetch(
-          'https://mercadocontrolback.fly.dev/api/shopping_list/?user_id=' +
-            user_id,
+          'https://mercadocontrolback.fly.dev/api/list_of_prices/',
           {
             method: 'GET',
             headers: {
@@ -23,13 +21,11 @@ const ShoppingList = () => {
             },
           }
         );
-
+        
         const data = await response.json();
 
         if (response.ok) {
-          const logo_supermarket = data[0].products_of_shopping_list[0].list_of_price.supermarket_logo
-          data[0].logo_super = "https://mercadocontrolback.fly.dev"+logo_supermarket
-          setShoppingList(data);
+            setlistOfPrice(data);
         } else {
           console.log(response);
         }
@@ -42,6 +38,7 @@ const ShoppingList = () => {
 
     fetchData();
   }, []);
+
 
   if (isLoading) {
     return (
@@ -58,30 +55,28 @@ const ShoppingList = () => {
       }>
       <View style={styles.card}>
         <View style={styles.cardImageContainer}>
-          <Image style={styles.cardImage} source={{ uri: item.logo_super }} />
+          <Image 
+          style={styles.cardImage} 
+          source={item.picture ? { uri: item.picture } : require('../assets/icons/canasta.png')} 
+          />
         </View>
         <View style={styles.cardContent}>
-          <Text style={styles.cardText}>{item.name}</Text>
-          <Text style={styles.cardText}>
-            Creada: {item.creation_date.substr(0, 10)}{' '}
-            <Text style={styles.cardText}>
-              {item.creation_date.substr(12, 4)}
-            </Text>
-          </Text>
+          <Text style={styles.cardText}>{item.product_name}</Text>
+          <Text style={styles.cardAuxText}>{item.supermarket_name}</Text>
+          <Text style={styles.cardAuxText}>{formatCurrency(item.price)}</Text> 
+          <Text style={styles.cardAuxText}>{item.creation_date.substr(0, 10)}</Text>
+
         </View>
       </View>
     </TouchableOpacity>
   );
 
-  ShoppingList.navigationOptions = {
-    title: 'Home',
-  };
 
   return (
     <View style={styles.container}>
       <FlatList
         style={styles.list}
-        data={shoppingList}
+        data={listOfPrice}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />
@@ -125,6 +120,9 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  cardAuxText: {
+    fontSize: 15,
   },
 });
 

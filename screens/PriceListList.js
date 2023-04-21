@@ -24,7 +24,6 @@ const ShoppingList = () => {
     }
     const fetchData = async () => {
       try {
-        console.log("ejecutando ", url)
         const response = await fetch(
           url,
           {
@@ -65,7 +64,7 @@ const ShoppingList = () => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('ShoppingListDetail', { id: item.id.toString() })
+        navigation.navigate('Product', { id: item.id.toString() })
       }>
       <View style={styles.card}>
         <View style={styles.cardImageContainer}>

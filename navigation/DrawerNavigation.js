@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 import ShoppingList from '../screens/ShoppingList';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignUp from '../screens/SignUp';
+import Product from '../screens/Product';
 import ShoppingListDetail from '../screens/ShoppingListDetail';
 import PriceListList from '../screens/PriceListList';
 import { useNavigation } from '@react-navigation/native'
@@ -22,8 +23,10 @@ export function DrawerNavigation() {
       <Drawer.Screen name="WelcomeScreen"  component={WelcomeScreen} />
       <Drawer.Screen name="LoginScreen" options={{ headerShown: false, drawerLabel: () => null }} component={LoginScreen} />
       <Drawer.Screen name="ShoppingList" options={{ drawerLabel: 'Listas de compras', title: '' }} component={ShoppingList} />
+      <Drawer.Screen name="ShoppingListDetail" options={{ drawerLabel: 'Listas de compras', title: '' }} component={ShoppingListDetail} />
       <Drawer.Screen name="SignUp" options={{ headerShown: false, drawerLabel: () => null }} component={SignUp} />
       <Drawer.Screen name="PriceListList" options={{ drawerLabel: 'Precios', title: 'Precios' }} component={PriceListList} />
+      <Drawer.Screen name="Product" options={{ drawerLabel: '', title: '' }} component={Product} />
     </Drawer.Navigator>
   );
 }

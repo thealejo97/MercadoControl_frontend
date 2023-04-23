@@ -18,6 +18,10 @@ const ShoppingList = () => {
     setIsModalVisible(false);
   };
 
+  const handleOpenModal = () => {
+    setIsModalVisible(true);
+  };
+
   const handleSearch = (text) => {
     setSearchText(text);
   };
@@ -26,12 +30,14 @@ const ShoppingList = () => {
   useEffect(() => {
     setIsLoading(true);
     let url = 'https://mercadocontrolback.fly.dev/api/list_of_prices/';
+    console.log(typeof searchText === 'string')
     if (selectedSupermarket) {
       url += `?supermarket_id=${selectedSupermarket.id}`;
-      
     }
     if (searchText) {
-      url += `${selectedSupermarket ? '&' : '?'}product_name=${searchText}`;
+      if(typeof searchText === 'string'){
+        url += `${selectedSupermarket ? '&' : '?'}product_name=${searchText}`;
+      }
       
     }
     console.log("Buscando ", url)
@@ -101,13 +107,11 @@ const ShoppingList = () => {
     };
     return (
       <View style={styles.container}>
-        
         <SupermarketPicker
           visible={isModalVisible}
           onClose={handleCloseModal}
           onSelect={handleSupermarketChange}
         />
-        
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.searchInput}
@@ -116,78 +120,114 @@ const ShoppingList = () => {
             onChangeText={setSearchText}
             onEndEditing={handleSearch}
           />
-          <TouchableOpacity onPress={() => setSearchText('')}>
+          <TouchableOpacity onPress={() => {
+            setSearchText(null);
+            setSelectedSupermarket(null);
+          }}>
+            <Text style={styles.clearText}>Borrar</Text>
           </TouchableOpacity>
         </View>
-  
-        
-      {isLoading ? (
-        <View style={styles.container}>
-          <ActivityIndicator size="large" color="#00ff00" />
-        </View>
-      ) : (
-        <>
-          {/* Nombre del supermercado seleccionado aquí... */}
-          {listOfPrice.length ? (
-            <FlatList
-              style={styles.list}
-              data={listOfPrice}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.id.toString()}
-            />
-          ) : (
-            <View style={styles.emptyStateContainer}>
-              <Text style={styles.emptyStateText}>No se encontraron resultados</Text>
-            </View>
-          )}
-        </>
-      )}
-      
-    </View>
-  );  
-};
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#00ff00" />
+          </View>
+        ) : (
+          <>
+            {listOfPrice.length ? (
+              <FlatList
+                style={styles.list}
+                data={listOfPrice}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+              />
+            ) : (
+              <View style={styles.emptyStateContainer}>
+                <Text style={styles.emptyStateText}>No se encontraron resultados</Text>
+              </View>
+            )}
+          </>
+        )}
+      </View>
+    );  
+  };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  list: {
-    marginTop: 10,
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 10,
-    padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      paddingHorizontal: 16,
+      paddingTop: 32,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  cardContent: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  cardImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  cardText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  cardAuxText: {
-    fontSize: 15,
-  },
-});
+    searchContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginVertical: 16,
+    },
+    searchInput: {
+      flex: 1,
+      height: 40,
+      borderRadius: 4,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      paddingHorizontal: 16,
+      marginRight: 8,
+    },
+    clearText: {
+      color: '#007aff',
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    selectedSupermarketContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: '#f5f5f5',
+      borderRadius: 4,
+      padding: 16,
+      marginBottom: 16,
+    },
+    selectedSupermarketText: {
+      fontWeight: 'bold',
+    },
+    changeSupermarketText: {
+      color: '#007aff',
+    },
+    selectSupermarketContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#f5f5f5',
+      borderRadius: 4,
+      padding: 16,
+      marginBottom: 16,
+    },
+    selectSupermarketText: {
+      fontWeight: 'bold',
+      color: '#007aff',
+    },
+    list: {
+      flex: 1,
+    },
+    card: {
+      flexDirection: 'row',
+      borderRadius: 4,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      padding: 16,
+      marginBottom: 16,
+    },  
+    cardImage: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      padding: 10,
+    },
+    cardImageContainer: {
+      padding: 20,
+    },
+  });
 
 
 export default ShoppingList;

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
+import { Text, View, StyleSheet, Image, FlatList, ActivityIndicator, TouchableOpacity, TextInput } from 'react-native';
 import formatCurrency from './Helpers';
 import { useNavigation } from '@react-navigation/native';
 import SupermarketPicker from './SupermarketPicker';
+
 
 const ShoppingList = () => {
   const [listOfPrice, setlistOfPrice] = useState([]);
@@ -10,18 +11,30 @@ const ShoppingList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedSupermarket, setSelectedSupermarket] = useState(null);
+  const [searchText, setSearchText] = useState('');
+
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
   };
+
+  const handleSearch = (text) => {
+    setSearchText(text);
+  };
+  
 
   useEffect(() => {
     setIsLoading(true);
     let url = 'https://mercadocontrolback.fly.dev/api/list_of_prices/';
     if (selectedSupermarket) {
       url += `?supermarket_id=${selectedSupermarket.id}`;
-      console.log("cambiaron url", selectedSupermarket)
+      
     }
+    if (searchText) {
+      url += `${selectedSupermarket ? '&' : '?'}product_name=${searchText}`;
+      
+    }
+    console.log("Buscando ", url)
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -35,31 +48,29 @@ const ShoppingList = () => {
         );
         
         const data = await response.json();
-
+  
         if (response.ok) {
-            setlistOfPrice(data);
-            setIsLoading(false);
+          console.log("Acabo de buscar", searchText)
+          setlistOfPrice(data);
         } else {
-          setIsLoading(false);
+          // Si la respuesta no es ok, mostrar un mensaje de error
+          Alert.alert('Error', 'No se pudo obtener la lista de precios', [
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ]);
         }
       } catch (error) {
-        setIsLoading(false);
+        // Si hay un error en la conexión, mostrar un mensaje de error
+        Alert.alert('Error', 'Hubo un problema de conexión', [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ]);
       } finally {
         setIsLoading(false);
       }
     };
-
+  
     fetchData();
-  }, [selectedSupermarket]);
+  }, [selectedSupermarket,searchText]);
 
-
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#00ff00" />
-      </View>
-    );
-  }
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -88,24 +99,52 @@ const ShoppingList = () => {
     console.log("Seleccionado ", supermarket.id)
     setSelectedSupermarket(supermarket);
     };
-  return (
-    <View style={styles.container}>
+    return (
+      <View style={styles.container}>
+        
+        <SupermarketPicker
+          visible={isModalVisible}
+          onClose={handleCloseModal}
+          onSelect={handleSupermarketChange}
+        />
+        
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Buscar producto..."
+            value={searchText}
+            onChangeText={setSearchText}
+            onEndEditing={handleSearch}
+          />
+          <TouchableOpacity onPress={() => setSearchText('')}>
+          </TouchableOpacity>
+        </View>
+  
+        
+      {isLoading ? (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#00ff00" />
+        </View>
+      ) : (
+        <>
+          {/* Nombre del supermercado seleccionado aquí... */}
+          {listOfPrice.length ? (
+            <FlatList
+              style={styles.list}
+              data={listOfPrice}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          ) : (
+            <View style={styles.emptyStateContainer}>
+              <Text style={styles.emptyStateText}>No se encontraron resultados</Text>
+            </View>
+          )}
+        </>
+      )}
       
-      <SupermarketPicker
-        visible={isModalVisible}
-        onClose={handleCloseModal}
-        onSelect={handleSupermarketChange}
-      />
-      <Text>{selectedSupermarket ? selectedSupermarket.name : ''}</Text>
-      
-      <FlatList
-        style={styles.list}
-        data={listOfPrice}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
